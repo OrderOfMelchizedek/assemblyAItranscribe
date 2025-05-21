@@ -94,7 +94,6 @@ def main():
                 if processed_audio_files_in_dir == 0:
                     # This message will print if the directory was empty or contained no supported audio files
                     print(f"No supported audio files found in directory '{input_path}'.")
-
             except PermissionError:
                 print(f"Error: Permission denied when trying to read directory '{input_path}'. Skipping.")
             except OSError as e:
@@ -175,6 +174,10 @@ if __name__ == "__main__":
 #      `python src/main.py restricted_dir/`
 #    - Expected: Error message "Permission denied when trying to read directory 'restricted_dir/'. Skipping."
 #      (Then restore permissions: `chmod 755 restricted_dir/`)
+#    - Note on previous bug: An earlier version had an issue where providing multiple inputs
+#      (e.g., `python src/main.py file1.mp3 file2.mp3`) would cause a crash due to an
+#      incorrect top-level validation check. This has been fixed; validation now occurs
+#      per-item, and the script correctly processes all valid inputs provided.
 #
 # Suggested Automated Test Structure (e.g., using `unittest` or `pytest`):
 # --------------------------------------------------------------------
