@@ -3,9 +3,11 @@ import pyaudio
 import asyncio
 import sys
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Set your AssemblyAI API key
-aai.settings.api_key = "ec3c0a51354d439997beb46021f0e138"
+aai.settings.api_key = os.getenv("API_KEY")
 
 # Global variables to store the session ID and the transcript text.
 session_id = None

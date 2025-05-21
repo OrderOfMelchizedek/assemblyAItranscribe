@@ -1,5 +1,6 @@
 import sys
 import os
+from dotenv import load_dotenv
 import assemblyai as aai
 from urllib.parse import urlparse
 import argparse
@@ -29,8 +30,9 @@ def main():
     
     args = parser.parse_args()
 
+    load_dotenv()
     # Replace with your API key
-    aai.settings.api_key = "ec3c0a51354d439997beb46021f0e138"
+    aai.settings.api_key = os.getenv("API_KEY")
 
     if not is_url(args.input) and not os.path.exists(args.input):
         print(f"Error: The file '{args.input}' does not exist.")
