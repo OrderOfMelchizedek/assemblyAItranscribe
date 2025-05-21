@@ -13,8 +13,23 @@ def is_url(string):
         return False
 
 def save_transcription(text, input_path):
+    # Define the name of the directory where transcripts will be saved
+    transcripts_dir_name = "transcripts"
+
+    # Create the directory if it doesn't already exist
+    # os.makedirs will create parent directories as needed if they don't exist.
+    # exist_ok=True means it won't raise an error if the directory already exists.
+    os.makedirs(transcripts_dir_name, exist_ok=True)
+
+    # Get the base name of the input file (e.g., "audio" from "/path/to/audio.mp3")
     base_name = os.path.splitext(os.path.basename(input_path))[0]
-    output_file = f"{base_name}_transcription.txt"
+    
+    # Construct the filename
+    file_name = f"{base_name}_transcription.txt"
+    
+    # Construct the full path for the output file inside the transcripts_dir_name
+    output_file = os.path.join(transcripts_dir_name, file_name)
+    
     with open(output_file, 'w') as f:
         f.write(text)
     print(f"Transcription saved to {output_file}")
@@ -60,10 +75,10 @@ def main():
     load_dotenv()
     aai.settings.api_key = os.getenv("API_KEY")
 
-    if not is_url(args.input) and not os.path.exists(args.input):
-        print(f"Error: The file '{args.input}' does not exist.")
-        sys.exit(1)
-
+    # REMOVE THE FOLLOWING BLOCK:
+    # if not is_url(args.input) and not os.path.exists(args.input):
+    #     print(f"Error: The file '{args.input}' does not exist.")
+    #     sys.exit(1)
 
     supported_extensions = ['.wav', '.mp3', '.m4a', '.ogg', '.flac', '.aac', '.opus'] # Define supported extensions
 
