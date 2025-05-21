@@ -1,5 +1,6 @@
 import sys
 import os
+from dotenv import load_dotenv
 import assemblyai as aai
 from urllib.parse import urlparse
 import argparse
@@ -55,8 +56,14 @@ def main():
     
     args = parser.parse_args()
 
-    # Replace with your API key
-    aai.settings.api_key = "ec3c0a51354d439997beb46021f0e138" # Make sure this is set
+    # Get API key from environment
+    load_dotenv()
+    aai.settings.api_key = os.getenv("API_KEY")
+
+    if not is_url(args.input) and not os.path.exists(args.input):
+        print(f"Error: The file '{args.input}' does not exist.")
+        sys.exit(1)
+
 
     supported_extensions = ['.wav', '.mp3', '.m4a', '.ogg', '.flac', '.aac', '.opus'] # Define supported extensions
 
@@ -87,7 +94,6 @@ def main():
                 if processed_audio_files_in_dir == 0:
                     # This message will print if the directory was empty or contained no supported audio files
                     print(f"No supported audio files found in directory '{input_path}'.")
-
             except PermissionError:
                 print(f"Error: Permission denied when trying to read directory '{input_path}'. Skipping.")
             except OSError as e:
