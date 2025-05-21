@@ -4,7 +4,7 @@ A collection of Python scripts for audio transcription using the AssemblyAI API.
 
 ## Scripts
 
-### Main Transcription Script (`main.py`)
+### Main Transcription Script (`src/main.py`)
 
 A command-line tool for transcribing audio files or URLs with optional speaker diarization.
 
@@ -17,19 +17,19 @@ A command-line tool for transcribing audio files or URLs with optional speaker d
 #### Usage:
 ```bash
 # Basic transcription
-python main.py /path/to/audio.mp3
+python src/main.py /path/to/audio.mp3
 
 # Transcription with speaker diarization
-python main.py /path/to/audio.mp3 --diarize
+python src/main.py /path/to/audio.mp3 --diarize
 
 # Specify number of speakers
-python main.py /path/to/audio.mp3 --diarize --speakers 3
+python src/main.py /path/to/audio.mp3 --diarize --speakers 3
 
 # Transcribe from URL
-python main.py https://example.com/audio.mp3 --diarize
+python src/main.py https://example.com/audio.mp3 --diarize
 ```
 
-### Real-time Transcription Script (`transcript_stream/main.py`)
+### Real-time Transcription Script (`src/transcript_stream.py`)
 
 A script for real-time transcription of audio from a BlackHole virtual audio device input.
 
@@ -41,8 +41,7 @@ A script for real-time transcription of audio from a BlackHole virtual audio dev
 #### Usage:
 ```bash
 # Run the real-time transcription script
-cd transcript_stream
-python main.py
+python src/transcript_stream.py
 ```
 
 ## Requirements
