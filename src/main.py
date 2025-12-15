@@ -41,9 +41,10 @@ def process_file(file_path_or_url, args):
         print(f"Error: The file '{file_path_or_url}' does not exist.")
         return # Use return instead of sys.exit(1) to continue with other files
 
-    config = aai.TranscriptionConfig(speaker_labels=args.diarize)
-    if args.speakers:
-        config.speakers_expected = args.speakers
+    config = aai.TranscriptionConfig(
+        speaker_labels=args.diarize,
+        speakers_expected=args.speakers if args.speakers else None
+    )
 
     transcriber = aai.Transcriber()
     print(f"Transcribing {file_path_or_url}...") # Add a print statement
@@ -73,14 +74,14 @@ def main():
 
     # Get API key from environment
     load_dotenv()
-    aai.settings.api_key = os.getenv("API_KEY")
+    aai.settings.api_key = os.getenv("ASSEMBLYAI_API_KEY")
 
     # REMOVE THE FOLLOWING BLOCK:
     # if not is_url(args.input) and not os.path.exists(args.input):
     #     print(f"Error: The file '{args.input}' does not exist.")
     #     sys.exit(1)
 
-    supported_extensions = ['.wav', '.mp3', '.m4a', '.ogg', '.flac', '.aac', '.opus'] # Define supported extensions
+    supported_extensions = ['.wav', '.mp3', '.m4a', '.ogg', '.flac', '.aac', '.opus', '.mp4'] # Define supported extensions
 
     for input_path in args.input:
         if is_url(input_path):
