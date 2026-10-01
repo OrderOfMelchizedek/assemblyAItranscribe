@@ -1,3 +1,4 @@
+assemblyai==1.6.1
+sounddevice
+numpy
 python-dotenv
-assemblyai
-pyaudio

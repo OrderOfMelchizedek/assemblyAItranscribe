@@ -1,4 +1,33 @@
+# Local credentials and configuration
 .env
-.DS_Store
-transcript_stream/.DS_Store
+.env.*
+*.pem
+*.key
+.claude/
+.agents/
+.codex/
+
+# Private outputs and source material
+transcriptions/
 transcripts/
+emails/
+recordings/
+*.wav
+*.mp3
+*.m4a
+*.mp4
+*.flac
+*.ogg
+*.aac
+*.opus
+*.webm
+*.pdf
+.Rhistory
+
+# Local environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
